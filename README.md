@@ -10,6 +10,7 @@ This is a simple web application that serves as a central hub for all my importa
 - **WordPress Meal Prep Site** 🍳: A WordPress website combining my love for cooking and meal prep.
 - **GitHub Repo** 🔗: A link to my GitHub repository with all my projects and code samples.
 - **LinkedIn Profile** 💼: My LinkedIn profile for professional networking.
+- **Job Autofill Extension** ⚡: Chrome extension that automates job applications (see demo on GitHub).
 
 ## How to Use 📝
 
