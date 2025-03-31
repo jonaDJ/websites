@@ -6,6 +6,7 @@ import ecom from "./assets/img/ecom.jpg";
 import wordpress from "./assets/img/wordpress.jpg";
 import git from "./assets/img/git.jpg";
 import linkedin from "./assets/img/linkedin.jpg";
+import job_autofill from "./assets/img/job_autofill.jpg";
 
 const cards = [
   {
@@ -55,6 +56,14 @@ const cards = [
     url: "https://www.linkedin.com/in/jonathd/",
     description:
       "My LinkedIn profile for professional networking. Connect with me if you’d like to chat about opportunities or collaborations!",
+  },
+  {
+    id: "07_card",
+    name: "Job Autofill Chrome Extension",
+    image: job_autofill,
+    url: "https://github.com/jonaDJ/job-autofill-extension",
+    description:
+      "Your personal job application robot! 🤖 Instantly fills those tedious forms so you can focus on what matters. No more 'type this, type that' - just click and watch the magic happen. Works while you sip your coffee ☕",
   },
 ];
 
