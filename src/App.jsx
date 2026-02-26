@@ -1,116 +1,188 @@
-import React, { useState } from "react";
 import "./App.css";
 import me from "./assets/img/my_avatar.png";
 import netflix from "./assets/img/netflix.jpg";
 import ecom from "./assets/img/ecom.jpg";
 import wordpress from "./assets/img/wordpress.jpg";
-import git from "./assets/img/git.jpg";
-import linkedin from "./assets/img/linkedin.jpg";
-import job_autofill from "./assets/img/job_autofill.jpg";
+import brainotopus from "./assets/img/brainotopus.png";
+import jobAutofill from "./assets/img/job_autofill.jpg";
 
-const cards = [
+const recruiterLinks = {
+  linkedin: "https://www.linkedin.com/in/jonathd/",
+  github: "https://github.com/jonaDJ",
+};
+
+const projects = [
   {
-    id: "01_card",
-    name: "Interactive Portfolio",
+    id: "portfolio",
+    title: "Interactive Portfolio",
     image: me,
+    category: "Portfolio",
+    status: "Live production",
     url: "https://portfolio-repo-swart.vercel.app/",
     description:
-      "This isn’t your typical portfolio—it’s a mobile-first, blog-style experience! Packed with projects, an 'About Me' section (everyone’s favorite, hehe), and a fresh way to showcase my work. Grab your phone and check it out—it’s a whole new experience!",
+      "A blog-style portfolio with project walkthroughs, personal story, and a layout designed for phones first.",
   },
   {
-    id: "02_card",
-    name: "Netflix Like (No Login Hassle!)",
+    id: "netflix-clone",
+    title: "Netflix-Style Streaming UI",
     image: netflix,
+    category: "Frontend clone",
+    status: "Live demo",
     url: "https://netflix-like-tawny.vercel.app/",
     description:
-      "Skipped the login/auth pages—this Netflix clone takes you straight to the fun! Featuring cool sliders, Top 10 lists, a search bar, and even a watchlist that actually stores your picks. It’s not just a showcase; it’s interactive!",
+      "Streaming-style interface with sliders, search, and a persistent watchlist to demonstrate component-driven state.",
   },
   {
-    id: "03_card",
-    name: "E-commerce Store (Slow but Steady!)",
-    image: ecom,
-    url: "https://your-ecommerce-store-url.com/",
+    id: "brainotopus",
+    title: "BrainoTopus Puzzle Hub",
+    image: brainotopus,
+    category: "Game site",
+    status: "Unlimited rounds",
+    url: "https://braino-topus.vercel.app/",
     description:
-      "Built with Render as the server, so apologies if it’s a bit slow to load. But hey, it’s got cool features like a dummy PayPal checkout. Try adding items to your cart and pretend to buy something—it’s fun!",
+      "A game site I created to replicate NYT-style puzzle gameplay with unlimited rounds and replay value.",
   },
   {
-    id: "04_card",
-    name: "WordPress MealPrep Site",
+    id: "ecommerce",
+    title: "E-commerce Store",
+    image: ecom,
+    category: "Online store",
+    status: "Demo link updating",
+    url: "",
+    description:
+      "Storefront, cart flow, and checkout simulation backed by a hosted server. Demo link is currently being refreshed.",
+  },
+  {
+    id: "wordpress",
+    title: "WordPress Food Blog",
     image: wordpress,
+    category: "Food + lifestyle",
+    status: "Production",
     url: "https://balancedbiteprep.com/",
     description:
-      "I’ve always wanted to create a WordPress site, and I combined my love for cooking and meal prep into this project. It’s a blend of WordPress, Shopify, and Wix vibes—check it out!",
+      "A production WordPress food blog/business site focused on content publishing, branding, and conversion-friendly sections.",
   },
   {
-    id: "05_card",
-    name: "GitHub Repo",
-    image: git,
-    url: "https://github.com/jonaDJ",
-    description:
-      "My GitHub repository is home to all my projects and code samples. Nothing fancy to say here—just dive in and explore!",
-  },
-  {
-    id: "06_card",
-    name: "LinkedIn Profile",
-    image: linkedin,
-    url: "https://www.linkedin.com/in/jonathd/",
-    description:
-      "My LinkedIn profile for professional networking. Connect with me if you’d like to chat about opportunities or collaborations!",
-  },
-  {
-    id: "07_card",
-    name: "Job Autofill Chrome Extension",
-    image: job_autofill,
+    id: "job-autofill",
+    title: "Job Autofill Extension",
+    image: jobAutofill,
+    category: "Chrome extension",
+    status: "Open source",
     url: "https://github.com/jonaDJ/job-autofill-extension",
     description:
-      "Your personal job application robot! 🤖 Instantly fills those tedious forms so you can focus on what matters. No more 'type this, type that' - just click and watch the magic happen. Works while you sip your coffee ☕",
+      "Chrome extension that auto-fills repetitive job form fields with one click to speed up application workflows.",
   },
 ];
 
 function App() {
-  const [hoveredCard, setHoveredCard] = useState(null);
-
   return (
-    <div className="app-container">
-      <div className="content-container">
-        <h1 className="main-heading">Urls</h1>
-        <p className="main-description">
-          These are some of my important links and projects. Instead of
-          constantly updating my resume or relying on free servers that may
-          expire, I decided to use GitHub.io as a central hub for all my links.
-          This way, I can easily update them in one place—fast, free, and
-          efficient. Pretty cool, right? Feel free to explore!
-        </p>
-        <p className="main-note">
-          <strong>Tip:</strong> Check out the descriptions on the cards—they’ll
-          guide you on how to use the apps/websites better!
-        </p>
-      </div>
-      <div className="card-grid">
-        {cards.map((card) => (
-          <div
-            key={card.id}
-            className={`card ${hoveredCard === card.id ? "card-hovered" : ""}`}
-            onMouseEnter={() => setHoveredCard(card.id)}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
-            <a href={card.url} target="_blank" rel="noopener noreferrer">
-              <img src={card.image} alt={card.name} className="card-image" />
-              <div className="card-content">
-                <h3 className="card-title">{card.name}</h3>
-                <p
-                  className={`card-description ${
-                    hoveredCard === card.id ? "show" : ""
-                  }`}
-                >
-                  {card.description}
-                </p>
-              </div>
-            </a>
+    <main className="hub">
+      <section className="hero-panel">
+        <div className="hero-grid">
+          <div>
+            <p className="eyebrow">Frontend + Responsive Web Developer</p>
+            <h1>Project Hub Built for Recruiters</h1>
+            <p className="hero-copy">
+              This is a direct path through my work. Each project card links to
+              a live product demo, production site, or source repository so you
+              can evaluate both design decisions and implementation quality fast.
+            </p>
+            <div className="hero-tags">
+              <span>UI Engineering</span>
+              <span>Responsive Systems</span>
+              <span>Production Delivery</span>
+            </div>
+            <div className="hero-actions">
+              <a
+                href={recruiterLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Contact on LinkedIn
+              </a>
+              <a
+                href={recruiterLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                Review GitHub
+              </a>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+
+          <aside className="hero-note">
+            <h2>Quick review path</h2>
+            <ol>
+              <li>Open live projects from the cards below</li>
+              <li>Review implementation details on GitHub</li>
+              <li>Connect with me for role discussion</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section className="projects-section" aria-label="Projects">
+        <div className="section-heading">
+          <h2>Selected Work</h2>
+          <p>Real projects with practical frontend and responsive outcomes.</p>
+        </div>
+
+        <div className="card-grid">
+          {projects.map((project, index) => (
+            <article
+              className={`project-card ${
+                project.url ? "" : "project-card-disabled"
+              }`}
+              key={project.id}
+              style={{ "--delay": `${index * 75}ms` }}
+            >
+              <div className="project-media">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                  loading="lazy"
+                />
+                <span className="media-label">{project.category}</span>
+              </div>
+
+              <div className="project-body">
+                <div className="project-meta">
+                  <span className="status-dot" aria-hidden="true" />
+                  <span>{project.status}</span>
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+              </div>
+
+              {project.url ? (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-link"
+                >
+                  Open Project
+                </a>
+              ) : (
+                <span className="card-link card-link-disabled">Link Updating</span>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer className="hub-footer">
+        <h2>Why this hub</h2>
+        <div className="footer-points">
+          <span>One index for all core projects</span>
+          <span>Mobile and desktop friendly navigation</span>
+          <span>Direct links for quick technical review</span>
+        </div>
+      </footer>
+    </main>
   );
 }
 
