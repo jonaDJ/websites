@@ -1,12 +1,15 @@
+import { useState } from "react";
 import "./App.css";
-import me from "./assets/img/my_avatar.png";
+import desktopAvatar from "./assets/img/avatar/avatar_3445.png";
+import mobileAvatar from "./assets/img/avatar/avatar_3447.png";
+import portfolioPreview from "./assets/img/portfolio.png";
 import netflix from "./assets/img/netflix.jpg";
 import ecom from "./assets/img/ecom.jpg";
 import wordpress from "./assets/img/wordpress.jpg";
 import brainotopus from "./assets/img/brainotopus.png";
 import jobAutofill from "./assets/img/job_autofill.jpg";
 
-const recruiterLinks = {
+const profileLinks = {
   linkedin: "https://www.linkedin.com/in/jonathd/",
   github: "https://github.com/jonaDJ",
 };
@@ -15,7 +18,7 @@ const projects = [
   {
     id: "portfolio",
     title: "Interactive Portfolio",
-    image: me,
+    image: portfolioPreview,
     category: "Portfolio",
     status: "Live production",
     url: "https://portfolio-repo-swart.vercel.app/",
@@ -64,24 +67,39 @@ const projects = [
   },
   {
     id: "job-autofill",
-    title: "Job Autofill Extension",
+    title: "Job Autofill Chrome Extension",
     image: jobAutofill,
-    category: "Chrome extension",
-    status: "Open source",
+    category: "Productivity tool",
+    status: "Open-source repository",
     url: "https://github.com/jonaDJ/job-autofill-extension",
+    ctaLabel: "View Repository",
     description:
-      "Chrome extension that auto-fills repetitive job form fields with one click to speed up application workflows.",
+      "A Chrome extension that pre-fills repetitive application fields in one click, reducing manual input during job applications.",
   },
 ];
 
 function App() {
+  const [showQuickGuide, setShowQuickGuide] = useState(false);
+
   return (
     <main className="hub">
       <section className="hero-panel">
         <div className="hero-grid">
           <div>
-            <p className="eyebrow">Frontend + Responsive Web Developer</p>
-            <h1>Project Hub Built for Recruiters</h1>
+            <div className="hero-top-row">
+              <div className="hero-top-text">
+                <p className="eyebrow">Frontend + Responsive Web Developer</p>
+                <div className="hero-headline">
+                  <h1>Project Hub Built for Fast Review</h1>
+                </div>
+              </div>
+              <img
+                src={mobileAvatar}
+                alt="jonaDJ avatar"
+                className="hero-avatar-compact"
+                loading="lazy"
+              />
+            </div>
             <p className="hero-copy">
               This is a direct path through my work. Each project card links to
               a live product demo, production site, or source repository so you
@@ -94,7 +112,7 @@ function App() {
             </div>
             <div className="hero-actions">
               <a
-                href={recruiterLinks.linkedin}
+                href={profileLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -102,23 +120,66 @@ function App() {
                 Contact on LinkedIn
               </a>
               <a
-                href={recruiterLinks.github}
+                href={profileLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
               >
                 Review GitHub
               </a>
+              <button
+                type="button"
+                className="btn btn-tertiary"
+                onClick={() => setShowQuickGuide((prev) => !prev)}
+                aria-expanded={showQuickGuide}
+                aria-controls="quick-guide"
+              >
+                {showQuickGuide ? "Back to Avatar" : "Show Quick Guide"}
+              </button>
             </div>
           </div>
 
-          <aside className="hero-note">
-            <h2>Quick review path</h2>
-            <ol>
-              <li>Open live projects from the cards below</li>
-              <li>Review implementation details on GitHub</li>
-              <li>Connect with me for role discussion</li>
-            </ol>
+          <aside
+            id="quick-guide"
+            className={`review-rail ${showQuickGuide ? "review-rail-visible" : "review-rail-hidden"}`}
+            aria-label="Quick review guide"
+          >
+            <div className="review-placeholder" aria-hidden={showQuickGuide}>
+              <img
+                src={desktopAvatar}
+                alt="jonaDJ avatar"
+                className="placeholder-avatar"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="review-guide" aria-hidden={!showQuickGuide}>
+              <p className="review-label">Quick Shortcut</p>
+              <h2>60-Second Review Flow</h2>
+              <ul className="review-list">
+                <li>
+                  <span className="review-index">01</span>
+                  <div>
+                    <h3>Open a Live Demo</h3>
+                    <p>Use any project card to quickly review the shipped product experience.</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="review-index">02</span>
+                  <div>
+                    <h3>Check the Code</h3>
+                    <p>Inspect implementation details, structure, and technical decisions on GitHub.</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="review-index">03</span>
+                  <div>
+                    <h3>Start a Conversation</h3>
+                    <p>Connect on LinkedIn if any project aligns with your goals.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </aside>
         </div>
       </section>
@@ -130,47 +191,51 @@ function App() {
         </div>
 
         <div className="card-grid">
-          {projects.map((project, index) => (
-            <article
-              className={`project-card ${
-                project.url ? "" : "project-card-disabled"
-              }`}
-              key={project.id}
-              style={{ "--delay": `${index * 75}ms` }}
-            >
-              <div className="project-media">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-image"
-                  loading="lazy"
-                />
-                <span className="media-label">{project.category}</span>
-              </div>
+          {projects.map((project, index) => {
+            const isLiveStatus = /live|production/i.test(project.status);
 
-              <div className="project-body">
-                <div className="project-meta">
-                  <span className="status-dot" aria-hidden="true" />
-                  <span>{project.status}</span>
+            return (
+              <article
+                className={`project-card ${
+                  project.url ? "" : "project-card-disabled"
+                }`}
+                key={project.id}
+                style={{ "--delay": `${index * 75}ms` }}
+              >
+                <div className="project-media">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-image"
+                    loading="lazy"
+                  />
+                  <span className="media-label">{project.category}</span>
                 </div>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
 
-              {project.url ? (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-link"
-                >
-                  Open Project
-                </a>
-              ) : (
-                <span className="card-link card-link-disabled">Link Updating</span>
-              )}
-            </article>
-          ))}
+                <div className="project-body">
+                  <div className={`project-meta ${isLiveStatus ? "project-meta-live" : ""}`.trim()}>
+                    <span className="status-dot" aria-hidden="true" />
+                    <span>{project.status}</span>
+                  </div>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </div>
+
+                {project.url ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="card-link"
+                  >
+                    {project.ctaLabel ?? "Open Project"}
+                  </a>
+                ) : (
+                  <span className="card-link card-link-disabled">Link Updating</span>
+                )}
+              </article>
+            );
+          })}
         </div>
       </section>
 

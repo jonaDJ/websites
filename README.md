@@ -1,28 +1,52 @@
-# My Links Hub 🌐
+# Project Hub
 
-This is a simple web application that serves as a central hub for all my important links and projects. Instead of constantly updating my resume or relying on free servers that may expire, I decided to use GitHub.io to host this page. It's fast, free, and easy to update!
+This repository hosts my personal project hub: https://jonadj.github.io/websites/
 
-## Features 🚀
+I am a student and frontend developer, and this site is designed to give recruiters, mentors, and collaborators a fast way to review my work in one place. It highlights live projects, production-style UI decisions, and links to source code.
 
-- **Interactive Portfolio** 🖥️: A mobile-first, blog-style portfolio showcasing my projects and skills.
-- **Netflix Like** 🎬: A Netflix UI clone with sliders, Top 10 lists, and a functional watchlist.
-- **E-commerce Store** 🛒: A fully functional e-commerce site with a dummy PayPal checkout.
-- **WordPress Meal Prep Site** 🍳: A WordPress website combining my love for cooking and meal prep.
-- **GitHub Repo** 🔗: A link to my GitHub repository with all my projects and code samples.
-- **LinkedIn Profile** 💼: My LinkedIn profile for professional networking.
-- **Job Autofill Extension** ⚡: Chrome extension that automates job applications (see demo on GitHub).
+## Project Goals
 
-## How to Use 📝
+- Present my strongest projects in a clear, recruiter-friendly format.
+- Show practical frontend skills through real, deployed work.
+- Maintain a single public page that stays current as I continue learning and shipping.
 
-1. **Explore the Cards** 🔍: Each card represents a project or link. Hover over a card to see a description.
-2. **Click to Visit** 🖱️: Click on any card to visit the corresponding website or profile.
-3. **Mobile-Friendly** 📱: The portfolio is designed to be mobile-friendly, so feel free to check it out on your phone!
+## Featured Work
 
-## Why This Exists 💡
+- Interactive Portfolio: Mobile-first portfolio with project walkthroughs and personal context.
+- Netflix-Style Streaming UI: Frontend clone focused on component structure, state, and interaction patterns.
+- BrainoTopus Puzzle Hub: NYT-style puzzle experience with unlimited play.
+- E-commerce Store: Storefront and checkout flow demonstration.
+- WordPress Food Blog: Production content site with branding and business-focused sections.
+- Job Autofill Extension: Chrome extension that automates repetitive job-form inputs.
 
-Instead of updating my resume every time I have a new project or link, I created this page as a central hub. It's a quick and efficient way to share my work without worrying about broken links or expired free servers. Plus, it's hosted on GitHub.io, so it's always up-to-date!
+## Tech Stack
 
-## Notes 📌
+- React
+- Vite
+- CSS
+- GitHub Pages
+- GitHub Actions
 
-- **Tip** 💡: Check out the descriptions on the cards—they’ll guide you on how to use the apps/websites better!
-- **Note** ⚠️: Links may change over time. Please check back periodically for updates.
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Deployment
+
+This project deploys automatically to GitHub Pages from the `main` branch using GitHub Actions.
+The Vite base path is configured for repository hosting at `/websites/`.
+
+## Contact
+
+- GitHub: https://github.com/jonaDJ
+- LinkedIn: https://www.linkedin.com/in/jonathd/
