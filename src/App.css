@@ -35,6 +35,7 @@ body {
     radial-gradient(circle at 95% 8%, #efe1cf 0%, transparent 34%),
     linear-gradient(160deg, var(--bg-1), var(--bg-2));
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -64,6 +65,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: clamp(1.2rem, 2.1vw, 1.8rem);
+  min-width: 0;
 }
 
 .hero-panel,
@@ -90,9 +92,13 @@ body::before {
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(181, 56, 69, 0.2), transparent 65%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
   gap: clamp(1.1rem, 2vw, 1.6rem);
@@ -127,6 +133,7 @@ body::before {
   letter-spacing: -0.02em;
   font-size: clamp(2rem, 4.4vw, 3.3rem);
   font-family: "Fraunces", Georgia, serif;
+  overflow-wrap: anywhere;
 }
 
 .hero-headline {
@@ -151,6 +158,65 @@ body::before {
   color: var(--muted);
   font-size: clamp(1rem, 1.8vw, 1.08rem);
   line-height: 1.68;
+  overflow-wrap: anywhere;
+}
+
+.hero-details {
+  margin-top: 0;
+}
+
+.hero-collapsible {
+  overflow: visible;
+}
+
+.hero-collapsible-open {
+  display: block;
+}
+
+.hero-collapsible-closed {
+  display: none;
+}
+
+.hero-collapse-summary {
+  display: none;
+  margin-top: 0.95rem;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  border: 0;
+  padding: 0;
+  color: #6b2230;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.hero-collapse-summary::-webkit-details-marker {
+  display: none;
+}
+
+.hero-collapse-summary::marker {
+  content: "";
+}
+
+.hero-collapse-summary::after {
+  content: "\25be";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hero-details[open] .hero-collapse-summary::after {
+  transform: rotate(180deg);
+}
+
+.hero-collapse-summary:focus-visible {
+  outline: 2px solid rgba(181, 56, 69, 0.42);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .hero-tags {
@@ -200,9 +266,28 @@ body::before {
 
 .hero-actions {
   margin-top: 1.1rem;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+}
+
+.hero-links-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
+  width: 100%;
+}
+
+.hero-links-row .btn {
+  width: 100%;
+}
+
+.btn-social {
+  gap: 0.42rem;
+}
+
+.action-icon {
+  width: 0.98rem;
+  height: 0.98rem;
+  flex: 0 0 auto;
 }
 
 .btn {
@@ -215,7 +300,9 @@ body::before {
   font-size: clamp(0.84rem, 0.45vw + 0.75rem, 0.9rem);
   font-weight: 800;
   padding: clamp(0.64rem, 1.2vw, 0.72rem) clamp(0.86rem, 1.8vw, 1rem);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .btn:hover {
@@ -341,7 +428,11 @@ body::before {
   width: 130px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(223, 113, 124, 0.34), transparent 64%);
+  background: radial-gradient(
+    circle,
+    rgba(223, 113, 124, 0.34),
+    transparent 64%
+  );
   pointer-events: none;
 }
 
@@ -627,6 +718,7 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  flex-wrap: wrap;
 }
 
 .project-meta-live {
@@ -652,6 +744,7 @@ body::before {
   margin: 0;
   line-height: 1.2;
   font-size: clamp(1rem, 0.7vw + 0.9rem, 1.08rem);
+  overflow-wrap: anywhere;
 }
 
 .project-card p {
@@ -659,6 +752,7 @@ body::before {
   color: var(--muted);
   line-height: 1.58;
   font-size: clamp(0.88rem, 0.45vw + 0.79rem, 0.93rem);
+  overflow-wrap: anywhere;
 }
 
 .card-link {
@@ -674,7 +768,9 @@ body::before {
   font-size: clamp(0.82rem, 0.4vw + 0.74rem, 0.86rem);
   font-weight: 800;
   padding: 0.62rem 0.72rem;
-  transition: transform 0.18s ease, background-color 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
 }
 
 .card-link:hover {
@@ -734,7 +830,9 @@ body::before {
 @media (max-width: 1050px) {
   .eyebrow {
     display: block;
-    width: fit-content;
+    width: 100%;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
   }
 
   .hero-grid {
@@ -777,6 +875,10 @@ body::before {
 }
 
 @media (max-width: 720px) {
+  .hub {
+    gap: 0.72rem;
+  }
+
   #root {
     width: min(1180px, 100% - 1.4rem);
   }
@@ -786,9 +888,10 @@ body::before {
   }
 
   .hero-top-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.45rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 0.65rem;
     max-width: 100%;
   }
 
@@ -799,12 +902,13 @@ body::before {
 
   .hero-avatar-compact {
     display: block;
-    width: clamp(42px, 12vw, 54px);
-    height: clamp(42px, 12vw, 54px);
-    margin-top: 0.9rem;
+    width: clamp(42px, 14vw, 82px);
+    height: clamp(42px, 14vw, 82px);
+    margin-top: 0;
+    align-self: end;
     border-radius: clamp(9px, 2vw, 11px);
     object-fit: cover;
-    object-position: center top;
+    object-position: center bottom;
     flex-shrink: 0;
   }
 
@@ -818,6 +922,26 @@ body::before {
     margin-top: 0.72rem;
     font-size: clamp(0.96rem, 2.2vw + 0.56rem, 1.04rem);
     line-height: 1.58;
+  }
+
+  .hero-details {
+    margin: 0;
+  }
+
+  .hero-mobile-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    align-self: end;
+    justify-self: end;
+    height: 100%;
+    gap: 0.35rem;
+  }
+
+  .hero-collapse-summary {
+    display: inline-flex;
+    margin-top: 0;
   }
 
   .hero-tags {
@@ -844,13 +968,25 @@ body::before {
     pointer-events: none;
   }
 
+  .review-rail-visible {
+    min-height: 0;
+    max-height: none;
+    padding: 0.82rem 0.12rem 0 0;
+  }
+
   .hero-panel {
-    padding: 1rem 0.95rem;
+    padding: 1rem 0.95rem 0.4rem;
   }
 
   .hero-actions {
     margin-top: 0.9rem;
     gap: 0.55rem;
+  }
+
+  .hero-links-row {
+    width: 100%;
+    gap: 0.55rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .btn {
@@ -859,8 +995,41 @@ body::before {
   }
 
   .review-list li {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .review-rail,
+  .review-guide,
+  .review-list li {
+    transition: none;
+    animation: none;
+  }
+
+  .review-rail-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .review-rail-hidden {
+    opacity: 0;
+    transform: none;
+  }
+
+  .review-rail-visible .review-guide,
+  .review-rail-visible .review-list li {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: 0s;
+  }
+
+  .review-rail-hidden .review-guide,
+  .review-rail-hidden .review-list li {
+    opacity: 0;
+    transform: none;
+    filter: none;
+    transition-delay: 0s;
   }
 
   .review-index {
@@ -871,12 +1040,28 @@ body::before {
     grid-column: span 12;
   }
 
+  .project-image {
+    aspect-ratio: 16 / 8;
+  }
+
   .project-body {
-    padding: 0.86rem 0.86rem 0.28rem;
+    padding: 0.74rem 0.78rem 0.12rem;
+  }
+
+  .project-meta {
+    margin-bottom: 0.46rem;
+  }
+
+  .project-card p {
+    margin: 0.48rem 0 0.62rem;
+    line-height: 1.5;
   }
 
   .card-link {
-    margin: auto 0.86rem 0.9rem;
+    margin: auto 0.78rem 0.72rem;
+    padding: 0.52rem 0.62rem;
+    font-size: 0.8rem;
+    border-radius: 9px;
   }
 
   .hub-footer {
@@ -884,3 +1069,51 @@ body::before {
   }
 }
 
+@media (max-width: 420px) {
+  .hub {
+    gap: 0.58rem;
+  }
+
+  #root {
+    width: calc(100% - 1rem);
+  }
+
+  .hero-panel {
+    padding: 0.9rem 0.8rem 0.32rem;
+  }
+
+  .hero-panel h1 {
+    font-size: clamp(1.52rem, 8.3vw, 1.98rem);
+  }
+
+  .hero-avatar-compact {
+    width: clamp(36px, 12.5vw, 56px);
+    height: clamp(36px, 12.5vw, 56px);
+  }
+
+  .project-image {
+    aspect-ratio: 16 / 7.7;
+  }
+
+  .project-body {
+    padding: 0.68rem 0.72rem 0.08rem;
+  }
+
+  .card-link {
+    margin: auto 0.72rem 0.66rem;
+    padding: 0.48rem 0.56rem;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.4rem, 7.1vw, 1.65rem);
+  }
+
+  .hero-actions {
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-size: 0.86rem;
+    padding: 0.68rem 0.74rem;
+  }
+}
