@@ -2,7 +2,7 @@
 
 This repository hosts my personal project hub: https://jonadj.github.io/websites/
 
-I am a student and frontend developer, and this site is designed to give recruiters, mentors, and collaborators a fast way to review my work in one place. It highlights live projects, production-style UI decisions, and links to source code.
+I am a student and front-end developer, and this site is designed to give recruiters, mentors, and collaborators a fast way to review my work in one place. It highlights live projects, production-style UI decisions, and links to source code.
 
 ## Project Goals
 
